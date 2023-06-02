@@ -2,23 +2,6 @@ version: '3'
 
 #Two services app where our application located and db where we store our data
 services:
-  app:
-    #Building Dockerfile which located in the same directory 
-    build: .
-    #Declare ports
-    ports:
-      - 8000:8000
-    #All sensitive data will store in .env.dev. In will done for security reason and it is one of best practice
-    #All sensitive data will store in .env.dev. In will done for security reason and it is one of best practice
-    environment:
-      DB_NAME: ${POSTGRES_DB}
-      DB_USER: ${POSTGRES_USER}
-      DB_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_HOST: db
-      FLASK_ENV: development
-    #Application depends on db
-    depends_on:
-      - db
   db:
     #Pulling image
     image: postgres:13.0-alpine
@@ -28,8 +11,26 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     #Neccessary env data which postgres need to run. Docker will look for data inside of .env.dev file
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+  app:
+    #Building Dockerfile which located in the same directory 
+    build: .
+    #Declare ports
+    ports:
+      - 8000:8000
+    #All sensitive data will store in .env.dev. In will done for security reason and it is one of best practice
     env_file:
       - ./.env
+
+    #Application depends on db
+    depends_on:
+      - db
+  
+    
+
 #Declaring volume in local to save data which will not erase when container suddenly removed.
 volumes:
   postgres_data:
