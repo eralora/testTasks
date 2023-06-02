@@ -12,8 +12,7 @@
 - Далее docker-compose up -d (Возможно с первого раза не получится запустить app, если не запуститься то необходимо еще раз  запустить эту команду "docker-compose up -d"). 
 =======
 - В файле .env написать необходимые данные DB_NAME, DB_USER, DB_PASSWORD
-- Далее docker-compose up -d
->>>>>>> f266b534cc42639c40501a21b8fb6671cf598651
+- Далее docker-compose up -d (Возможно с первого раза не получится запустить app, если не запуститься то необходимо еще раз  запустить эту команду "docker-compose up -d"). 
 - Проверить работоспособность в браузере или в терминале
 curl localhost:8000/api/v1/users \
   -X POST -d '{"firstName":"Docker","lastName":"testUser"}' \
