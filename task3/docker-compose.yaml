@@ -10,10 +10,10 @@ services:
     #Declearing mount points locals and in container
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-    #Neccessary env data which postgres need to run. Docker will look for data inside of .env.dev file
+    #Neccessary env data which postgres need to run. Docker will look for data inside of .env file
     environment:
       POSTGRES_USER: ${DB_USER}
-      POSTGRES_DB: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
   app:
     #Building Dockerfile which located in the same directory 
@@ -21,7 +21,7 @@ services:
     #Declare ports
     ports:
       - 8000:8000
-    #All sensitive data will store in .env.dev. In will done for security reason and it is one of best practice
+    #All sensitive data will store in .env In will done for security reason and it is one of best practice
     env_file:
       - ./.env
 
